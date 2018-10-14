@@ -22,6 +22,6 @@ def index():
 def read(slug):
     matches = [post for post in aggregate_posts() if post['slug'] == slug]
     if not matches:
-        flask.abort(404)
+        abort(404)
     post = matches[0]  # there should only be one match
     return render_template('post.html', post=post)
