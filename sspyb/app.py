@@ -19,8 +19,7 @@ def index():
 
 @app.route('/posts/<slug>')
 def read(slug):
-    matches = [post for post in aggregate_posts() if post['slug'] == slug]
-    if not matches:
-        abort(404)
-    post = matches[0]  # there should only be one matching post
-    return render_template('post.html', post=post)
+    for post in aggregate_posts():
+        if post['slug'] == slug:
+            return render_template('post.html', post=post)
+    abort(404)
