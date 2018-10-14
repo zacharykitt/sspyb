@@ -10,7 +10,7 @@ def aggregate_posts():
     posts = []
     for path in glob.glob('posts/*.yaml'):
         with open(path) as f:
-            posts.append(json.load(f))
+            posts.append(yaml.load(f))
     return posts
 
 @app.route('/')

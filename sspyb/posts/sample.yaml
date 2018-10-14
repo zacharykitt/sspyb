@@ -1,5 +1,6 @@
 ---
 title: This is a sample blog post.
+slug : sample-blog-post
 date : 10/04/18
 html :
         <p>This is a sample paragraph.</p>
