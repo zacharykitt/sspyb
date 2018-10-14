@@ -1,5 +1,6 @@
 import glob
-import json
+
+import yaml
 
 from flask import Flask, render_template
 
@@ -7,7 +8,7 @@ app = Flask(__name__)
 
 def aggregate_posts():
     posts = []
-    for path in glob.glob('posts/*.json'):
+    for path in glob.glob('posts/*.yaml'):
         with open(path) as f:
             posts.append(json.load(f))
     return posts
@@ -19,4 +20,6 @@ def index():
 
 @app.route('/posts/<slug>')
 def read(slug):
-    return render_template(f'posts/{slug}.html')
+    with open(f'posts/{slug}.yaml') as f:
+        post = yaml.load(f)
+    return render_template('post.html', post=post)
