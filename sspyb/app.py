@@ -2,7 +2,7 @@ import glob
 
 import yaml
 
-from flask import Flask, render_template
+from flask import abort, Flask, render_template
 
 app = Flask(__name__)
 
@@ -20,6 +20,8 @@ def index():
 
 @app.route('/posts/<slug>')
 def read(slug):
-    with open(f'posts/{slug}.yaml') as f:
-        post = yaml.load(f)
+    matches = [post for post in aggregate_posts() if post['slug'] == slug]
+    if not matches:
+        flask.abort(404)
+    post = matches[0]  # there should only be one match
     return render_template('post.html', post=post)
