@@ -16,3 +16,7 @@ def aggregate_posts():
 def index():
     posts = aggregate_posts()
     return render_template('index.html', posts=posts)
+
+@app.route('/posts/<slug>')
+def read(slug):
+    return render_template(f'posts/{slug}.html')
