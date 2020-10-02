@@ -16,7 +16,7 @@ base_title = config['base_title']
 # init app
 app = Flask(__name__)
 
-def __yaml_parser(fpath):
+def parse_yaml(fpath):
     with open(fpath) as f:
         doc = yaml.load(f)
         doc['html'] = markdown.markdown(doc['mark'])
@@ -25,7 +25,7 @@ def __yaml_parser(fpath):
 def aggregate_posts():
     posts = []
     for path in glob.glob('posts/*.yaml'):
-        posts.append(_yaml_parser(path))
+        posts.append(parse_yaml(path))
     posts = sorted(posts,
                    reverse=True,
                    key=lambda x: datetime.strptime(x['date'], '%m/%d/%y'))
@@ -34,7 +34,7 @@ def aggregate_posts():
 def aggregate_pages():
     pages = []
     for path in glob.glob('pages/*.yaml'):
-        pages.append(_yaml_parser(path))
+        pages.append(parse_yaml(path))
     sorted(pages, key=lambda x: x['slug'])
     return pages
 
