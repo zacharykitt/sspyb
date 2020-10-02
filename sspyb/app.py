@@ -16,7 +16,7 @@ base_title = config['base_title']
 # init app
 app = Flask(__name__)
 
-def _yaml_parser(fpath):
+def __yaml_parser(fpath):
     with open(fpath) as f:
         doc = yaml.load(f)
         doc['html'] = markdown.markdown(doc['mark'])
