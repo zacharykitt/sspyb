@@ -10,8 +10,8 @@ import yaml
 with open('config.json') as f:
     config = json.load(f)
 
-theme_dir = config['theme_dir']
-base_title = config['base_title']
+theme_dir = config['themeDir']
+base_title = config['baseTitle']
 
 # init app
 app = Flask(__name__)
